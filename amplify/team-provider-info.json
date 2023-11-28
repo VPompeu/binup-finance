@@ -1,0 +1,33 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-binupfinance-dev-143414-authRole",
+      "UnauthRoleArn": "arn:aws:iam::688316770607:role/amplify-binupfinance-dev-143414-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::688316770607:role/amplify-binupfinance-dev-143414-authRole",
+      "Region": "sa-east-1",
+      "DeploymentBucketName": "amplify-binupfinance-dev-143414-deployment",
+      "UnauthRoleName": "amplify-binupfinance-dev-143414-unauthRole",
+      "StackName": "amplify-binupfinance-dev-143414",
+      "StackId": "arn:aws:cloudformation:sa-east-1:688316770607:stack/amplify-binupfinance-dev-143414/b1ff4050-8638-11ee-bd10-0a208a818b16",
+      "AmplifyAppId": "d1mwrfwusff1et"
+    }
+  },
+  "binup": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-binupfinance-binup-143628-authRole",
+      "UnauthRoleArn": "arn:aws:iam::688316770607:role/amplify-binupfinance-binup-143628-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::688316770607:role/amplify-binupfinance-binup-143628-authRole",
+      "Region": "sa-east-1",
+      "DeploymentBucketName": "amplify-binupfinance-binup-143628-deployment",
+      "UnauthRoleName": "amplify-binupfinance-binup-143628-unauthRole",
+      "StackName": "amplify-binupfinance-binup-143628",
+      "StackId": "arn:aws:cloudformation:sa-east-1:688316770607:stack/amplify-binupfinance-binup-143628/01a0b030-8639-11ee-bd10-0a208a818b16",
+      "AmplifyAppId": "d1mwrfwusff1et"
+    },
+    "categories": {
+      "auth": {
+        "binupfinanceef247705": {}
+      }
+    }
+  }
+}
