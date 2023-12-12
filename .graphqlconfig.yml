@@ -1,0 +1,18 @@
+projects:
+  binupfinance:
+    schemaPath: amplify/backend/api/binupfinance/build/schema.graphql
+    includes:
+      - app.js
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: javascript
+        generatedFileName: ''
+        docsFilePath: .
+        region: sa-east-1
+        apiId: null
+        maxDepth: 2
+extensions:
+  amplify:
+    version: 3

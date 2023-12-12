@@ -1,0 +1,27 @@
+{
+    "Version": 5,
+    "ElasticsearchWarning": true,
+    "ResolverConfig": {
+        "project": {
+            "ConflictHandler": "OPTIMISTIC_CONCURRENCY",
+            "ConflictDetection": "VERSION"
+        },
+        "models": {
+            "Usuarios": {
+                "ConflictHandler": "LAMBDA",
+                "ConflictDetection": "VERSION",
+                "LambdaConflictHandler": {
+                    "name": "syncConflictHandler466d4f6a-${env}"
+                }
+            },
+            "Despesas": {
+                "ConflictHandler": "AUTOMERGE",
+                "ConflictDetection": "VERSION"
+            },
+            "Receitas": {
+                "ConflictHandler": "AUTOMERGE",
+                "ConflictDetection": "VERSION"
+            }
+        }
+    }
+}

@@ -1,4 +1,28 @@
 {
+  "api": {
+    "binupfinance": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDate": "2024-12-10T16:22:05.446Z",
+              "apiKeyExpirationDays": 365,
+              "description": "da2-qn32so5vgrgfzb3ridb57e6zma"
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
   "auth": {
     "binupfinanceef247705": {
       "customAuth": false,
@@ -26,5 +50,13 @@
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
     }
-  }
+  },
+  "function": {
+    "syncConflictHandler466d4f6a": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "storage": {}
 }

@@ -1,0 +1,21 @@
+type Usuarios @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  email: String
+  Receitas: [Receitas] @manyToMany(relationName: "UsuariosReceitas")
+  Despesas: [Despesas] @manyToMany(relationName: "UsuariosDespesas")
+}
+
+type Despesas @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  value: Float
+  usuarioss: [Usuarios] @manyToMany(relationName: "UsuariosDespesas")
+}
+
+type Receitas @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  value: Float
+  usuarioss: [Usuarios] @manyToMany(relationName: "UsuariosReceitas")
+}
+ 

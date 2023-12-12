@@ -2,7 +2,8 @@
 import './App.css';
 import {Authenticator} from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import Receitas from './Receitas';
+import Finance from './finance';
+
 
 const App = () => {
 
@@ -12,7 +13,7 @@ const App = () => {
         if (user) {
           return (
             <div>
-              <Receitas />
+              <Finance />
               <button onClick={signOut}>Sair</button>
             </div>
           );
