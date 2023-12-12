@@ -4,8 +4,19 @@
     "Parameters": {
         "env": {
             "Type": "String"
+        },
+        "storageUsuariosName": {
+            "Type": "String",
+            "Default": "storageUsuariosName"
+        },
+        "storageUsuariosArn": {
+            "Type": "String",
+            "Default": "storageUsuariosArn"
+        },
+        "storageUsuariosStreamArn": {
+            "Type": "String",
+            "Default": "storageUsuariosArn"
         }
-    
     },
     "Conditions": {
         "ShouldNotCreateEnvResources": {
@@ -19,47 +30,50 @@
     },
     "Resources": {
         "LambdaFunction": {
-          "Type": "AWS::Lambda::Function",
-          "Metadata": {
-            "aws:asset:path": "./src",
-            "aws:asset:property": "Code"
-          },
-          "Properties": {
-            "Handler": "index.handler",
-            "FunctionName": {
-                "Fn::If": [
-                    "ShouldNotCreateEnvResources",
-                    "syncConflictHandler466d4f6a",
-                    {
-
-                        "Fn::Join": [
-                            "",
-                            [
-                                "syncConflictHandler466d4f6a",
-                                "-",
-                                {
-                                    "Ref": "env"
-                                }
+            "Type": "AWS::Lambda::Function",
+            "Metadata": {
+                "aws:asset:path": "./src",
+                "aws:asset:property": "Code"
+            },
+            "Properties": {
+                "Handler": "index.handler",
+                "FunctionName": {
+                    "Fn::If": [
+                        "ShouldNotCreateEnvResources",
+                        "syncConflictHandler466d4f6a",
+                        {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    "syncConflictHandler466d4f6a",
+                                    "-",
+                                    {
+                                        "Ref": "env"
+                                    }
+                                ]
                             ]
-                        ]
+                        }
+                    ]
+                },
+                "Environment": {
+                    "Variables": {
+                        "ENV": {
+                            "Ref": "env"
+                        },
+                        "REGION": {
+                            "Ref": "AWS::Region"
+                        }
                     }
-                ]
-            },
-            "Environment": {
-                "Variables" : {
-                    "ENV": {
-                        "Ref": "env"
-                    },
-                    "REGION": {
-                        "Ref": "AWS::Region"
-                    }
-                    
-                }
-            },
-            "Role": { "Fn::GetAtt" : ["LambdaExecutionRole", "Arn"] },
-            "Runtime": "nodejs18.x",
-            "Timeout": 25
-          }
+                },
+                "Role": {
+                    "Fn::GetAtt": [
+                        "LambdaExecutionRole",
+                        "Arn"
+                    ]
+                },
+                "Runtime": "nodejs18.x",
+                "Timeout": 25
+            }
         },
         "LambdaExecutionRole": {
             "Type": "AWS::IAM::Role",
@@ -69,7 +83,6 @@
                         "ShouldNotCreateEnvResources",
                         "syncConflictHandler466d4f6aLambdaRole",
                         {
-
                             "Fn::Join": [
                                 "",
                                 [
@@ -100,25 +113,101 @@
                     ]
                 }
             }
-        }
-        ,"lambdaexecutionpolicy": {
-            "DependsOn": ["LambdaExecutionRole"],
+        },
+        "lambdaexecutionpolicy": {
+            "DependsOn": [
+                "LambdaExecutionRole"
+            ],
             "Type": "AWS::IAM::Policy",
             "Properties": {
                 "PolicyName": "lambda-execution-policy",
-                "Roles": [{ "Ref": "LambdaExecutionRole" }],
+                "Roles": [
+                    {
+                        "Ref": "LambdaExecutionRole"
+                    }
+                ],
                 "PolicyDocument": {
                     "Version": "2012-10-17",
                     "Statement": [
                         {
                             "Effect": "Allow",
-                            "Action":["logs:CreateLogGroup",
-                            "logs:CreateLogStream",
-                            "logs:PutLogEvents"],
-                            "Resource": { "Fn::Sub" : [ "arn:aws:logs:${region}:${account}:log-group:/aws/lambda/${lambda}:log-stream:*", { "region": {"Ref": "AWS::Region"},  "account": {"Ref": "AWS::AccountId"}, "lambda": {"Ref": "LambdaFunction"}} ]}
+                            "Action": [
+                                "logs:CreateLogGroup",
+                                "logs:CreateLogStream",
+                                "logs:PutLogEvents"
+                            ],
+                            "Resource": {
+                                "Fn::Sub": [
+                                    "arn:aws:logs:${region}:${account}:log-group:/aws/lambda/${lambda}:log-stream:*",
+                                    {
+                                        "region": {
+                                            "Ref": "AWS::Region"
+                                        },
+                                        "account": {
+                                            "Ref": "AWS::AccountId"
+                                        },
+                                        "lambda": {
+                                            "Ref": "LambdaFunction"
+                                        }
+                                    }
+                                ]
+                            }
                         }
                     ]
                 }
+            }
+        },
+        "UsuariosTriggerPolicy": {
+            "DependsOn": [
+                "LambdaExecutionRole"
+            ],
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyName": "lambda-trigger-policy-Usuarios",
+                "Roles": [
+                    {
+                        "Ref": "LambdaExecutionRole"
+                    }
+                ],
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "dynamodb:DescribeStream",
+                                "dynamodb:GetRecords",
+                                "dynamodb:GetShardIterator",
+                                "dynamodb:ListStreams"
+                            ],
+                            "Resource": [
+                                {
+                                    "Ref": "storageUsuariosStreamArn"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "UsuariosTrigger": {
+            "Type": "AWS::Lambda::EventSourceMapping",
+            "DependsOn": [
+                "UsuariosTriggerPolicy"
+            ],
+            "Properties": {
+                "BatchSize": 100,
+                "Enabled": true,
+                "EventSourceArn": {
+                    "Ref": "storageUsuariosStreamArn"
+                },
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "LambdaFunction",
+                        "Arn"
+                    ]
+                },
+                "StartingPosition": "LATEST"
             }
         }
     },
@@ -129,7 +218,12 @@
             }
         },
         "Arn": {
-            "Value": {"Fn::GetAtt": ["LambdaFunction", "Arn"]}
+            "Value": {
+                "Fn::GetAtt": [
+                    "LambdaFunction",
+                    "Arn"
+                ]
+            }
         },
         "Region": {
             "Value": {

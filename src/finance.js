@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
-function App() {
+function Finance() {
   const [modalType, setModalType] = useState(null);
   const [title, setTitle] = useState('');
   const [value, setValue] = useState('');
@@ -14,33 +15,25 @@ function App() {
   }, []);
 
   const handleAddTransaction = () => {
-    if (title && value && modalType) {
+    if (title && value) {
       const newTransaction = {
         title,
         value: parseFloat(value),
         type: modalType,
       };
-
-      const transactionPath = modalType === 'receita' ? '/adicionarReceitas' : '/adicionarDespesas';
-
-      fetch(transactionPath, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newTransaction),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error('Erro ao adicionar transação:', error);
-        });
-
       const updatedTransactions = [...transactions, newTransaction];
       setTransactions(updatedTransactions);
+
       localStorage.setItem('transactions', JSON.stringify(updatedTransactions));
+
+      const apiEndpoint = modalType === 'receita' ? '/adicionarReceitas' : '/adicionarDespesas';
+      axios.post(apiEndpoint, { nome: title, valor: parseFloat(value) })
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error('Erro ao adicionar transação:', error);
+        });
 
       setTitle('');
       setValue('');
@@ -143,9 +136,9 @@ function App() {
               </form>
             </div>
             <div className="modal-footer">
-            <button type="button" className="btn btn-primary" onClick={handleAddTransaction}>
-              Cadastrar
-            </button>
+              <button type="button" className="btn btn-primary" onClick={handleAddTransaction}>
+                Cadastrar
+              </button>
               <button type="button" className="btn btn-secondary" onClick={() => setModalType(null)}>
                 Fechar
               </button>
@@ -161,4 +154,4 @@ function App() {
   );
 }
 
-export default App;
+export default Finance;

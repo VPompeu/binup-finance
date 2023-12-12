@@ -1,0 +1,12 @@
+{
+  "resourceName": "Usuarios",
+  "tableName": "Usuarios",
+  "partitionKey": {
+    "fieldName": "email",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": [
+    "syncConflictHandler466d4f6a"
+  ]
+}

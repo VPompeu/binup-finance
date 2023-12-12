@@ -1,12 +1,10 @@
-//import logo from './logo.svg'; 
+import React from 'react';
 import './App.css';
-import {Authenticator} from '@aws-amplify/ui-react';
+import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import Finance from './finance';
 
-
 const App = () => {
-
   return (
     <Authenticator>
       {({ signOut, user }) => {
