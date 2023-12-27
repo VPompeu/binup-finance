@@ -27,6 +27,11 @@
     "categories": {
       "auth": {
         "binupfinanceef247705": {}
+      },
+      "function": {
+        "syncConflictHandler466d4f6a": {},
+        "Usuarios": {},
+        "transactionsFunction": {}
       }
     }
   }
