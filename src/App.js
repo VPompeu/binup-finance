@@ -14,7 +14,6 @@ const App = () => {
           return (
             <div>
               <Finance />
-              
               <button onClick={signOut}>Sair</button>
             </div>
           );
