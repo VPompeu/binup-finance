@@ -23,6 +23,12 @@ export type AmplifyDependentResourcesAttributes = {
       "LambdaExecutionRole": "string",
       "Name": "string",
       "Region": "string"
+    },
+    "transactionsFunction": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
     }
   },
   "storage": {
