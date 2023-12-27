@@ -1,36 +1,36 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateReceitas = /* GraphQL */ `
-  subscription OnCreateReceitas($filter: ModelSubscriptionReceitasFilterInput) {
-    onCreateReceitas(filter: $filter) {
+export const onCreateTodo = /* GraphQL */ `
+  subscription OnCreateTodo($filter: ModelSubscriptionTodoFilterInput) {
+    onCreateTodo(filter: $filter) {
       id
-      titulo
-      valor
+      name
+      description
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const onUpdateReceitas = /* GraphQL */ `
-  subscription OnUpdateReceitas($filter: ModelSubscriptionReceitasFilterInput) {
-    onUpdateReceitas(filter: $filter) {
+export const onUpdateTodo = /* GraphQL */ `
+  subscription OnUpdateTodo($filter: ModelSubscriptionTodoFilterInput) {
+    onUpdateTodo(filter: $filter) {
       id
-      titulo
-      valor
+      name
+      description
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const onDeleteReceitas = /* GraphQL */ `
-  subscription OnDeleteReceitas($filter: ModelSubscriptionReceitasFilterInput) {
-    onDeleteReceitas(filter: $filter) {
+export const onDeleteTodo = /* GraphQL */ `
+  subscription OnDeleteTodo($filter: ModelSubscriptionTodoFilterInput) {
+    onDeleteTodo(filter: $filter) {
       id
-      titulo
-      valor
+      name
+      description
       createdAt
       updatedAt
       __typename

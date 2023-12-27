@@ -1,29 +1,29 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getReceitas = /* GraphQL */ `
-  query GetReceitas($id: ID!) {
-    getReceitas(id: $id) {
+export const getTodo = /* GraphQL */ `
+  query GetTodo($id: ID!) {
+    getTodo(id: $id) {
       id
-      titulo
-      valor
+      name
+      description
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const listReceitass = /* GraphQL */ `
-  query ListReceitass(
-    $filter: ModelReceitasFilterInput
+export const listTodos = /* GraphQL */ `
+  query ListTodos(
+    $filter: ModelTodoFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listReceitass(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        titulo
-        valor
+        name
+        description
         createdAt
         updatedAt
         __typename
