@@ -78,6 +78,13 @@
       "service": "Lambda"
     }
   },
+  "interactions": {
+    "test": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lex"
+    }
+  },
   "storage": {
     "Usuarios": {
       "providerPlugin": "awscloudformation",
