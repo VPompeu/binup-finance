@@ -1,4 +1,4 @@
-// This is sample code. Please update this to suite your schema
+
 
 exports.handler = async (event, context, callback) => {
   console.log('Received event {}', JSON.stringify(event, 3));

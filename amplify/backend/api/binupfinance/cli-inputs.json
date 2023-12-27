@@ -5,43 +5,7 @@
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "expirationTime": 365,
-      "apiKeyExpirationDate": "2024-12-10T16:22:05.446Z",
-      "keyDescription": "da2-qn32so5vgrgfzb3ridb57e6zma"
-    },
-    "additionalAuthTypes": [
-      {
-        "mode": "AWS_IAM"
-      }
-    ],
-    "conflictResolution": {
-      "defaultResolutionStrategy": {
-        "type": "OPTIMISTIC_CONCURRENCY"
-      },
-      "perModelResolutionStrategy": [
-        {
-          "resolutionStrategy": {
-            "type": "LAMBDA",
-            "resolver": {
-              "type": "EXISTING",
-              "name": "syncConflictHandler466d4f6a-${env}"
-            }
-          },
-          "entityName": "Usuarios"
-        },
-        {
-          "resolutionStrategy": {
-            "type": "AUTOMERGE"
-          },
-          "entityName": "Despesas"
-        },
-        {
-          "resolutionStrategy": {
-            "type": "AUTOMERGE"
-          },
-          "entityName": "Receitas"
-        }
-      ]
+      "expirationTime": 7
     }
   }
 }
